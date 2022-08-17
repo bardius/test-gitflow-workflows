@@ -1,3 +1,3 @@
 # test-gitflow-workflows
 
-test-6
+test-6 major
