@@ -1,3 +1,3 @@
 # test-gitflow-workflows
 
-test-4
+test-6
