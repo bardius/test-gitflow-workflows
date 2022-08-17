@@ -46,6 +46,7 @@ jobs:
 
       - name: Update changelog & bump version
         run: |
+          npm ci
           npm run release
           echo "::set-output name=commit::$(git rev-parse HEAD)"
 
