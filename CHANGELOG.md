@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 0.1.0 (2022-08-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* testing
+
+### Features
+
+* breaking change feat ([30316cd](https://github.com/bardius/test-gitflow-workflows/commit/30316cd5bc518fe8b554e119dc5211e5908d278d))
+
 ### 0.0.8 (2022-08-17)
 
 ### 0.0.7 (2022-08-17)
