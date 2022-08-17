@@ -1,0 +1,30 @@
+{
+  "name": "test-gitflow-workflows",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "build": "exit 1",
+    "test": "exit 1",
+    "commit": "git-cz",
+    "release": "standard-version"
+  },
+  "devDependencies": {
+    "@digitalroute/cz-conventional-changelog-for-jira": "7.3.0",
+    "commitizen": "4.2.4",
+    "standard-version": "9.5.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/@digitalroute/cz-conventional-changelog-for-jira",
+      "jiraMode": false,
+      "jiraOptional": true,
+      "skipScope": true,
+      "defaultType": "feat"
+    }
+  },
+  "standard-version": {
+    "skip": {
+      "tag": true
+    }
+  }
+}
