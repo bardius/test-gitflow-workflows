@@ -37,12 +37,15 @@ jobs:
           echo "New version is $new_version"
           echo "New release branch name is $branch_name"
           git checkout -b "$branch_name"
+          
+          echo "::set-output name=source_branch_name::$source_branch_name"
+          echo "::set-output name=branch_name::$branch_name"
+          echo "::set-output name=new_version::$new_version"
 
       - name: Update changelog & bump version
         run: |
           npm ci
           npm run release
-          echo "::set-output name=commit::$(git rev-parse HEAD)"
 
       - name: Push new release branch
         run: git push --set-upstream origin ${{ steps.create-release.outputs.branch_name }}
