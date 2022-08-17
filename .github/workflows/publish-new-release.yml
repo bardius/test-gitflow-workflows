@@ -33,6 +33,9 @@ jobs:
 #          draft: false
 #          prerelease: false
 
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
