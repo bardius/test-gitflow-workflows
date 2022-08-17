@@ -1,4 +1,4 @@
-name: "Draft new release"
+name: "Draft new release original"
 
 on:
   workflow_dispatch:
@@ -12,8 +12,7 @@ jobs:
     name: "Draft a new release"
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source branch
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       # In order to make a commit, we need to initialize a user.
       # You may choose to write something less generic here if you want, it doesn't matter functionality wise.
@@ -22,11 +21,15 @@ jobs:
           git config user.name "GitHub actions"
           git config user.email noreply@github.com
 
+      - name: Checkout ${{ github.event.inputs.source_branch }} to prepare release
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.source_branch }}
+
       # Calculate the next release version based on conventional semantic release
       - name: Create release branch
         id: create-release
         run: |
-          source_branch_name=${GITHUB_REF##*/}
           current_version=$(jq -r .version package.json)
           
           npm ci
@@ -36,11 +39,10 @@ jobs:
 
           branch_name="release/${new_version}"
 
-          echo "Source branch for new release is $source_branch_name"
           echo "Current version is $current_version"
           echo "New version is $new_version"
-          echo "New release branch name is $branch_name"
-          git checkout -b "$branch_name"
+          echo "New branch name is $branch_name"
+          git checkout -b "$branch_name" ${{ github.event.inputs.source_branch }}
 
       - name: Update changelog & bump version
         run: |
@@ -50,11 +52,11 @@ jobs:
         id: make-commit
         run: |
           git add CHANGELOG.md package.json package-lock.json
-          git commit --message "ci: Prepare release $branch_name from ${{ steps.create-release.outputs.source_branch_name }}"
+          git commit --message "ci: Prepare release $branch_name from ${{ github.event.inputs.source_branch }}"
 
           echo "::set-output name=commit::$(git rev-parse HEAD)"
 
-      - name: Push new release branch
+      - name: Push new branch
         run: git push origin ${{ steps.create-release.outputs.branch_name }}
 
       - name: Create pull request into master
