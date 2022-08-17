@@ -29,6 +29,7 @@ jobs:
           source_branch_name=${GITHUB_REF##*/}
           current_version=$(jq -r .version package.json)
           
+          npm ci
           npm run release
           new_version=$(jq -r .version package.json)
           git reset --hard

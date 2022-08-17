@@ -1,4 +1,4 @@
-name: "Draft new release"
+name: "Draft new release original"
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   draft-new-release:
-    name: "Draft a new release original"
+    name: "Draft a new release"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -32,6 +32,7 @@ jobs:
         run: |
           current_version=$(jq -r .version package.json)
           
+          npm ci
           npm run release
           new_version=$(jq -r .version package.json)
           git reset --hard
