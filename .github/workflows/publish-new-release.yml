@@ -25,13 +25,32 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
+#      - name: Create Release
+#        uses: softprops/action-gh-release@v1
+#        with:
+##          body_path: ${{ github.workspace }}/CHANGELOG.md
+#          tag_name: v${{ steps.extract-version.outputs.release_version }}
+#          name: ${{ steps.extract-version.outputs.release_version }}
+#          generate_release_notes: true
+
+      - name: Get notes
+        id: generate_notes
+        uses: anmarkoulis/commitizen-changelog-reader@master
         with:
-#          body_path: ${{ github.workspace }}/CHANGELOG.md
+          tag_name: ${{ steps.extract-version.outputs.release_version }}
+          changelog: CHANGELOG.md
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
           tag_name: v${{ steps.extract-version.outputs.release_version }}
-          name: ${{ steps.extract-version.outputs.release_version }}
-          generate_release_notes: true
+          release_name: Release ${{ steps.extract-version.outputs.release_version }}
+          prerelease: false
+          draft: false
+          body: ${{join(fromJson(steps.generate_notes.outputs.notes).notes, '')}}
 
       - name: Create pull request into develop
         uses: repo-sync/pull-request@v2
