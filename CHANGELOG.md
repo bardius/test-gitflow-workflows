@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.2.3 (2022-08-29)
+
+
+### Features
+
+* etst new release in git ([41e755c](https://github.com/bardius/test-gitflow-workflows/commit/41e755cbabd115cacd7732532fdd36497c12dce0))
+
 ### 0.2.2 (2022-08-29)
 
 
