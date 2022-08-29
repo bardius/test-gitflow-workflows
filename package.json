@@ -20,7 +20,7 @@
       "path": "./node_modules/@digitalroute/cz-conventional-changelog-for-jira",
       "jiraMode": false,
       "jiraOptional": true,
-      "skipScope": true,
+      "skipScope": false,
       "defaultType": "feat"
     }
   },
