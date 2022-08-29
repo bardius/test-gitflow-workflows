@@ -56,6 +56,6 @@ jobs:
           source_branch: ${{ steps.create-release.outputs.branch_name }}
           destination_branch: "master"
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          pr_title: "ci: Pulling ${{ steps.create-release.outputs.branch_name }} into master"
+          pr_title: "chore(release): Pulling ${{ steps.create-release.outputs.branch_name }} into master"
           pr_body: ":crown: *An automated PR*"
           pr_reviewer: ${{ github.actor }}

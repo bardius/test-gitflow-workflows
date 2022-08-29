@@ -33,24 +33,33 @@ jobs:
 #          name: ${{ steps.extract-version.outputs.release_version }}
 #          generate_release_notes: true
 
-      - name: Get notes
-        id: generate_notes
-        uses: anmarkoulis/commitizen-changelog-reader@master
-        with:
-          tag_name: refs/tags/v${{ steps.extract-version.outputs.release_version }}
-          changelog: ./CHANGELOG.md
+#      - name: Get notes
+#        id: generate_notes
+#        uses: anmarkoulis/commitizen-changelog-reader@master
+#        with:
+#          tag_name: refs/tags/v${{ steps.extract-version.outputs.release_version }}
+#          changelog: ./CHANGELOG.md
 
-      - name: Create Release
+#      - name: Create Release
+#        id: create_release
+#        uses: actions/create-release@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          tag_name: refs/tags/v${{ steps.extract-version.outputs.release_version }}
+#          release_name: Release refs/tags/v${{ steps.extract-version.outputs.release_version }}
+#          prerelease: false
+#          draft: false
+#          body: ${{join(fromJson(steps.generate_notes.outputs.notes).notes, '')}}
+
+      - name: Create Github Release
         id: create_release
-        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: refs/tags/v${{ steps.extract-version.outputs.release_version }}
-          release_name: Release refs/tags/v${{ steps.extract-version.outputs.release_version }}
-          prerelease: false
-          draft: false
-          body: ${{join(fromJson(steps.generate_notes.outputs.notes).notes, '')}}
+        run: |
+          npm ci
+          export CONVENTIONAL_GITHUB_RELEASER_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          npm run release:github
 
       - name: Create pull request into develop
         uses: repo-sync/pull-request@v2
@@ -58,6 +67,6 @@ jobs:
           source_branch: "master"
           destination_branch: "develop"
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          pr_title: "ci: Pulling master into develop as post release step"
+          pr_title: "chore(release): Pulling master into develop as post release step"
           pr_body: ":crown: *An automated PR*"
           pr_reviewer: ${{ github.actor }}
