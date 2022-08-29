@@ -23,6 +23,8 @@ jobs:
       # Calculate the next release version based on conventional semantic release
       - name: Create release branch
         id: create-release
+        env:
+          HUSKY: 0
         run: |
           source_branch_name=${GITHUB_REF##*/}
           current_version=$(jq -r .version package.json)
@@ -46,6 +48,8 @@ jobs:
           echo "::set-output name=new_version::$new_version"
 
       - name: Update changelog & bump version
+        env:
+          HUSKY: 0
         run: |
           npm ci
           npm run release
