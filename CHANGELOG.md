@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.2.9 (2022-08-29)
+
+
+### Features
+
+* sfsfg ([aec8a64](https://github.com/bardius/test-gitflow-workflows/commit/aec8a64145f95e0488d5e8d684530b9c28d8752b))
+
 ### 0.2.8 (2022-08-29)
 
 
