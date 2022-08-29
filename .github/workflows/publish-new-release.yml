@@ -37,7 +37,7 @@ jobs:
         id: generate_notes
         uses: anmarkoulis/commitizen-changelog-reader@master
         with:
-          tag_name: ${{ steps.extract-version.outputs.release_version }}
+          tag_name: refs/tags/v${{ steps.extract-version.outputs.release_version }}
           changelog: CHANGELOG.md
 
       - name: Create Release
@@ -46,8 +46,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ steps.extract-version.outputs.release_version }}
-          release_name: Release ${{ steps.extract-version.outputs.release_version }}
+          tag_name: refs/tags/v${{ steps.extract-version.outputs.release_version }}
+          release_name: Release refs/tags/v${{ steps.extract-version.outputs.release_version }}
           prerelease: false
           draft: false
           body: ${{join(fromJson(steps.generate_notes.outputs.notes).notes, '')}}
