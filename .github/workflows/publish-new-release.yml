@@ -38,7 +38,7 @@ jobs:
         uses: anmarkoulis/commitizen-changelog-reader@master
         with:
           tag_name: refs/tags/v${{ steps.extract-version.outputs.release_version }}
-          changelog: CHANGELOG.md
+          changelog: ./CHANGELOG.md
 
       - name: Create Release
         id: create_release
