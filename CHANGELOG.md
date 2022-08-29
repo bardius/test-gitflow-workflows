@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/bardius/test-gitflow-workflows/compare/v0.2.13...v0.3.0) (2022-08-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* testing braikng hange descriptions
+
+### Features
+
+* dummy feat ([965c273](https://github.com/bardius/test-gitflow-workflows/commit/965c273befd68cd2a72a343ce3483e8891555807))
+* gffggfs fsf sffs ([14f4b96](https://github.com/bardius/test-gitflow-workflows/commit/14f4b964c8e8b8eb436f9aa9a392eeaa7b47a284))
+* tae in all changes for the logs ([d3eba6a](https://github.com/bardius/test-gitflow-workflows/commit/d3eba6aa319021fdf4d9fd8a68a0baba7e577645))
+
+
+### Bug Fixes
+
+* du hhhte  hd ([348b69f](https://github.com/bardius/test-gitflow-workflows/commit/348b69f7d2abed53055949c0cb324b759f955ab8))
+* dummy fix ([97ae6fa](https://github.com/bardius/test-gitflow-workflows/commit/97ae6fa86c42fbf5228d67ae44e8ddae98039d1f))
+
 ### 0.2.13 (2022-08-29)
 
 
