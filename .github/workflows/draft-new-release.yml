@@ -37,6 +37,7 @@ jobs:
           echo "New version is $new_version"
           echo "New release branch name is $branch_name"
           git checkout -b "$branch_name"
+          git push --set-upstream origin "$branch_name"
           
           echo "::set-output name=source_branch_name::$source_branch_name"
           echo "::set-output name=branch_name::$branch_name"
@@ -47,10 +48,12 @@ jobs:
           npm ci
           npm run release
 
-      - name: Push new release branch
+      - name: Push new version in release branch
         run: |
           git pull
-          git push --set-upstream origin ${{ steps.create-release.outputs.branch_name }}
+          git add .
+          git commit -m "chore(release): bump up version and generate change logs"
+          git push
 
       - name: Create pull request into master
         uses: repo-sync/pull-request@v2
