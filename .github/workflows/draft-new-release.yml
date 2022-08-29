@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout source branch
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       # In order to make a commit, we need to initialize a user.
       # You may choose to write something less generic here if you want, it doesn't matter functionality wise.
