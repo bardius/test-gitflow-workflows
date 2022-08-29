@@ -1,6 +1,6 @@
 {
   "name": "test-gitflow-workflows",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "main": "index.js",
   "scripts": {
     "build": "exit 1",
@@ -25,8 +25,6 @@
     }
   },
   "standard-version": {
-    "skip": {
-      "tag": true
-    }
+    "skip": {}
   }
 }
