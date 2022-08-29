@@ -26,7 +26,6 @@
   },
   "standard-version": {
     "skip": {
-      "tag": true
     }
   }
 }
