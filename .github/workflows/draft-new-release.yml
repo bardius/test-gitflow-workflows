@@ -48,7 +48,9 @@ jobs:
           npm run release
 
       - name: Push new release branch
-        run: git push --set-upstream origin ${{ steps.create-release.outputs.branch_name }}
+        run: |
+          git pull
+          git push --set-upstream origin ${{ steps.create-release.outputs.branch_name }}
 
       - name: Create pull request into master
         uses: repo-sync/pull-request@v2
