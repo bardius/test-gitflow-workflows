@@ -50,10 +50,7 @@ jobs:
 
       - name: Push new version in release branch
         run: |
-          git pull
-          git add .
-          git commit -m "chore(release): bump up version and generate change logs"
-          git push
+          git push --follow-tags origin ${{ steps.create-release.outputs.branch_name }}
 
       - name: Create pull request into master
         uses: repo-sync/pull-request@v2
