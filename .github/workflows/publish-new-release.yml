@@ -30,10 +30,11 @@ jobs:
       - name: Create Github Release
         id: create_release
         env:
+          HUSKY: 0
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npm ci
-          export CONVENTIONAL_GITHUB_RELEASER_TOKEN=${{ secrets.GITHUB_TOKEN }}
           npm run release:github
 
       - name: Create pull request into develop
