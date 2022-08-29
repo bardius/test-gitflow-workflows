@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.2.6 (2022-08-29)
+
+
+### Bug Fixes
+
+* debugging\ ([be3e429](https://github.com/bardius/test-gitflow-workflows/commit/be3e4298d2a8cff3cdc39c4caca1279e14745e08))
+
 ### 0.2.5 (2022-08-29)
 
 
