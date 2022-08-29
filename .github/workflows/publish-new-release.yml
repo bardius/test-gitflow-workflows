@@ -1,13 +1,17 @@
 name: "Publish new github release"
 
 on:
-  workflow_dispatch
+  pull_request:
+    branches:
+      - master
+    types:
+      - closed
 
 jobs:
   release:
     name: Publish new release
     runs-on: ubuntu-latest
-#    if: github.event.pull_request.merged == true # only merged pull requests must trigger this job
+    if: github.event.pull_request.merged == true # only merged pull requests must trigger this job
     steps:
       - name: Extract version from branch name (for release branches)
         id: extract-version
@@ -23,41 +27,12 @@ jobs:
         with:
           fetch-depth: 0
 
-#      - name: Create Release
-#        uses: softprops/action-gh-release@v1
-#        with:
-##          body_path: ${{ github.workspace }}/CHANGELOG.md
-#          tag_name: v${{ steps.extract-version.outputs.release_version }}
-#          name: ${{ steps.extract-version.outputs.release_version }}
-#          generate_release_notes: true
-
-#      - name: Get notes
-#        id: generate_notes
-#        uses: anmarkoulis/commitizen-changelog-reader@master
-#        with:
-#          tag_name: refs/tags/v${{ steps.extract-version.outputs.release_version }}
-#          changelog: ./CHANGELOG.md
-
-#      - name: Create Release
-#        id: create_release
-#        uses: actions/create-release@v1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          tag_name: refs/tags/v${{ steps.extract-version.outputs.release_version }}
-#          release_name: Release refs/tags/v${{ steps.extract-version.outputs.release_version }}
-#          prerelease: false
-#          draft: false
-#          body: ${{join(fromJson(steps.generate_notes.outputs.notes).notes, '')}}
-
       - name: Create Github Release
         id: create_release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npm ci
-          git --no-pager log --decorate --no-color -10 --pretty=oneline
-          ./node_modules/.bin/git-semver-tags 
           export CONVENTIONAL_GITHUB_RELEASER_TOKEN=${{ secrets.GITHUB_TOKEN }}
           npm run release:github
 
@@ -67,6 +42,6 @@ jobs:
           source_branch: "master"
           destination_branch: "develop"
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          pr_title: "chore(release): Pulling master into develop as post release step"
+          pr_title: "chore(release): Pulling master into develop post release v${{ steps.extract-version.outputs.release_version }}"
           pr_body: ":crown: *An automated PR*"
           pr_reviewer: ${{ github.actor }}
