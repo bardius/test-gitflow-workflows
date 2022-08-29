@@ -50,7 +50,7 @@ jobs:
 
       - name: Push new version in release branch
         run: |
-          git push --follow-tags origin ${{ steps.create-release.outputs.branch_name }}
+          git push --follow-tags
 
       - name: Create pull request into master
         uses: repo-sync/pull-request@v2

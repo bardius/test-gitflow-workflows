@@ -57,6 +57,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          git pull --all
           npm ci
           export CONVENTIONAL_GITHUB_RELEASER_TOKEN=${{ secrets.GITHUB_TOKEN }}
           npm run release:github
