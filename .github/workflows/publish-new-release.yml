@@ -61,7 +61,7 @@ jobs:
           node -v 
           npm -v
           npm ci
-          git log --decorate --no-color
+          git log --decorate --no-color -10 --pretty=oneline
           ./node_modules/.bin/git-semver-tags 
           export CONVENTIONAL_GITHUB_RELEASER_TOKEN=${{ secrets.GITHUB_TOKEN }}
           npm run release:github
