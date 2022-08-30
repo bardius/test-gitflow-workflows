@@ -1,0 +1,57 @@
+name: Build and Deploy
+
+on:
+  workflow_dispatch: {}
+
+env:
+  AWS_REGION: ##region##
+  S3BUCKET: ##s3-bucket##
+  RELEASE_VERSION: 1.0.0
+  TARGET_ENV: Dev
+  APPLICATION_NAME: CodeDeployAppNameWithASG
+  DEPLOYMENT_GROUP_NAME: CodeDeployGroupName
+
+jobs:
+  build-and-upload:
+    name: Build & Upload
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout Repository
+
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.IAMROLE_GITHUB }}
+          role-session-name: GitHub-Action-Role
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Upload Artifacts to s3
+        run: aws s3 sync build/ s3://${{ env.S3BUCKET }}/${{ env.RELEASE_VERSION }}
+        
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: ${{ env.TARGET_ENV }}
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: ${{ secrets.IAMROLE_GITHUB }}
+        role-session-name: GitHub-Action-Role
+        aws-region: ${{ env.AWS_REGION }}
+    - run: |
+        echo "Deploying branch ${{ env.GITHUB_REF }} to ${{ github.event.inputs.environment }}"
+        commit_hash=`git rev-parse HEAD`
+        aws deploy create-deployment --application-name ${{ env.APPLICATION_NAME }} --deployment-group-name ${{DEPLOYMENT_GROUP_NAME}} --github-location repository=$GITHUB_REPOSITORY,commitId=$commit_hash --ignore-application-stop-failures
