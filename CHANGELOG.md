@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.2](https://github.com/bardius/test-gitflow-workflows/compare/v0.3.1...v0.3.2) (2022-08-29)
+
+
+### Features
+
+* kvfjyvvjvj ([c9203d9](https://github.com/bardius/test-gitflow-workflows/commit/c9203d9edd38c3da9aa4f7e6c5077f900ec87083))
+* **testscope:** jcc fyjyj cjcngc ncvj ([531af0d](https://github.com/bardius/test-gitflow-workflows/commit/531af0d645cb22ee0189d879082cbad53cdd4114))
+
 ### [0.3.1](https://github.com/bardius/test-gitflow-workflows/compare/v0.3.0...v0.3.1) (2022-08-29)
 
 
