@@ -48,10 +48,14 @@ jobs:
           echo "::set-output name=new_version::$new_version"
 
       - name: Update changelog & bump version
+        id: finish-release
         env:
           HUSKY: 0
         run: |
           npm ci
+          SUMMARY=$(((conventional-changelog -u) 2>&1) || true)
+          echo $SUMMARY
+          echo "::set-output name=commit_summary::$SUMMARY"
           npm run release
 
       - name: Push new version in release branch
@@ -65,5 +69,5 @@ jobs:
           destination_branch: "master"
           github_token: ${{ secrets.GITHUB_TOKEN }}
           pr_title: "chore(release): Pulling ${{ steps.create-release.outputs.branch_name }} into master"
-          pr_body: ":crown: *An automated PR*"
+          pr_body: ":crown: *An automated PR*\n\n${{ steps.finish-release.outputs.commit_summary }}"
           pr_reviewer: ${{ github.actor }}
