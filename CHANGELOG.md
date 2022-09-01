@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.8](https://github.com/bardius/test-gitflow-workflows/compare/v0.3.7...v0.3.8) (2022-09-01)
+
+
+### Features
+
+* **sdfdsffdsf:** sfsdsdffasdf ([0bbf9bd](https://github.com/bardius/test-gitflow-workflows/commit/0bbf9bda536e3329a247088a3956910a238179d5))
+
 ### [0.3.7](https://github.com/bardius/test-gitflow-workflows/compare/v0.3.6...v0.3.7) (2022-09-01)
 
 
