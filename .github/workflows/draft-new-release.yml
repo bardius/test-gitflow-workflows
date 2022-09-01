@@ -1,13 +1,14 @@
 name: "Draft new release"
 
 on:
-  workflow_dispatch:
-    branches: [ "release-candidate", "hotfix/*" ]
+  workflow_dispatch
 
 jobs:
   draft-new-release:
     name: "Draft a new release"
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/release-candidate'
+    # TODO also allow hotfix/*
     steps:
       - name: Checkout source branch
         uses: actions/checkout@v2
