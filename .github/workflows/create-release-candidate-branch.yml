@@ -1,8 +1,7 @@
 name: "Create new release candidate branch"
 
 on:
-  workflow_dispatch:
-    branches: [ "develop" ]
+  workflow_dispatch
 
 jobs:
   create-branch:
