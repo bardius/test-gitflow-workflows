@@ -51,6 +51,6 @@ jobs:
         uses: koj-co/delete-merged-action@master
         if: startsWith(github.event.pull_request.head.ref, 'release/')
         with:
-          branches: "release/*, release-candidate"
+          branches: "release/*"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
