@@ -1,4 +1,4 @@
-name: "Create new release candidate"
+name: "Create new release candidate branch"
 
 on:
   workflow_dispatch

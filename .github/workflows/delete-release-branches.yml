@@ -1,0 +1,22 @@
+name: "Cleanup release branches"
+
+on:
+  pull_request:
+    branches:
+      - master
+    types:
+      - closed
+
+jobs:
+  release:
+    name: Cleanup release branches
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true # only merged pull requests must trigger this job
+    steps:
+      - name: Delete release branches
+        uses: koj-co/delete-merged-action@master
+        if: startsWith(github.event.pull_request.head.ref, 'release/')
+        with:
+          branches: "release/, release-candidate"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
