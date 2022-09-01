@@ -7,8 +7,10 @@ jobs:
   draft-new-release:
     name: "Draft a new release"
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/release-candidate'
-    # TODO also allow hotfix/*
+    if: contains('
+      refs/heads/hotfix/
+      refs/heads/release-candidate
+      ', github.ref)
     steps:
       - name: Checkout source branch
         uses: actions/checkout@v2
