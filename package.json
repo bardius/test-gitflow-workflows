@@ -1,6 +1,6 @@
 {
   "name": "test-gitflow-workflows",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "main": "index.js",
   "scripts": {
     "build": "exit 1",
@@ -12,6 +12,7 @@
   "devDependencies": {
     "@digitalroute/cz-conventional-changelog-for-jira": "7.3.0",
     "commitizen": "4.2.4",
+    "conventional-changelog-cli": "2.2.2",
     "conventional-github-releaser": "3.1.5",
     "standard-version": "9.5.0"
   },
