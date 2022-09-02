@@ -1,4 +1,4 @@
-name: Draft new release
+name: Deploy Tag (rollback)
 
 on:
   workflow_dispatch
