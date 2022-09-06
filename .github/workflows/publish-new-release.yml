@@ -18,7 +18,8 @@ jobs:
         if: startsWith(github.event.pull_request.head.ref, 'release/')
         run: |
           BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
-          VERSION=${BRANCH_NAME#release/}
+          VERSION=${BRANCH_NAME#hotfix-}
+          VERSION=${VERSION#release/}
 
           echo "::set-output name=release_version::$VERSION"
 
@@ -47,10 +48,26 @@ jobs:
           pr_body: ":crown: *An automated PR*"
           pr_reviewer: ${{ github.actor }}
 
+      - name: Delete hotfix release branches
+        uses: koj-co/delete-merged-action@master
+        if: startsWith(github.event.pull_request.head.ref, 'hotfix-release/')
+        with:
+          branches: 'hotfix-release/*'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Delete release branches
         uses: koj-co/delete-merged-action@master
         if: startsWith(github.event.pull_request.head.ref, 'release/')
         with:
-          branches: "release/*"
+          branches: 'release/*'
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Delete release candidate branch
+        uses: koj-co/delete-merged-action@master
+        if: startsWith(github.event.pull_request.head.ref, 'release/')
+        with:
+          branches: 'release-candidate'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

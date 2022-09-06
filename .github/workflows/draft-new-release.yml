@@ -28,6 +28,8 @@ jobs:
           HUSKY: 0
         run: |
           source_branch_name=${GITHUB_REF##*/}
+          release_type=release
+          grep -q "hotfix" <<< "${source_branch_name}" && release_type=hotfix-release
           current_version=$(jq -r .version package.json)
           
           npm ci
@@ -35,12 +37,14 @@ jobs:
           new_version=$(jq -r .version package.json)
           git reset --hard
 
-          branch_name="release/${new_version}"
+          branch_name="${release_type}/${new_version}"
 
           echo "Source branch for new release is $source_branch_name"
           echo "Current version is $current_version"
           echo "New version is $new_version"
           echo "New release branch name is $branch_name"
+          git fetch origin master --depth=1
+          git merge origin/master
           git checkout -b "$branch_name"
           git push --set-upstream origin "$branch_name"
           
