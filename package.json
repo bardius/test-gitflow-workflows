@@ -7,7 +7,7 @@
     "test": "exit 1",
     "commit": "git-cz",
     "release": "standard-version",
-    "release:github": "conventional-github-releaser -p angular -v"
+    "release:github": "conventional-github-releaser -p angular"
   },
   "devDependencies": {
     "@digitalroute/cz-conventional-changelog-for-jira": "7.3.0",
